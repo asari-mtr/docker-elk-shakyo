@@ -2,7 +2,8 @@ version: '2'
 
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+    build:
+      context: elasticsearch/
     volumes:
       - ./data:/usr/share/elasticsearch/data
     ports:
@@ -12,7 +13,8 @@ services:
       - elk
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:6.3.2
+    build:
+      context: logstash/
     volumes:
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
     ports:
@@ -23,7 +25,8 @@ services:
       - elk
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.3.2
+    build:
+      context: kibana/
     ports:
       - 5601:5601
     depends_on:
